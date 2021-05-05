@@ -1,6 +1,6 @@
 package com.liana.webservice.domain;
 
-import com.liana.webservice.domain.posts.PostRepository;
+import com.liana.webservice.domain.posts.PostsRepository;
 import com.liana.webservice.domain.posts.Posts;
 
 import org.junit.After;
@@ -16,25 +16,25 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostRepositoryTest {
+public class PostsRepositoryTest {
 
     @Autowired
-    PostRepository postRepository;
+    PostsRepository postsRepository;
 
     @After
     public void cleanup(){
-        postRepository.deleteAll();
+        postsRepository.deleteAll();
     }
 
     @Test
     public void 게시글저장_불러오기(){
-        postRepository.save(Posts.builder()
+        postsRepository.save(Posts.builder()
         .title("테스트 게시글")
         .content("테스트 본문")
         .author("liana")
         .build());
 
-        List<Posts> postsList = postRepository.findAll();
+        List<Posts> postsList = postsRepository.findAll();
 
         Posts posts = postsList.get(0);
         assertThat(posts.getTitle(), is("테스트 게시글"));
